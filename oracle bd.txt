@@ -1,0 +1,338 @@
+-- attendance --
+CREATE SEQUENCE seq_attendance
+START WITH 1
+INCREMENT BY 1
+NOCACHE; -- Puedes ajustar esta opción según tus necesidades
+
+-- Crear la tabla
+CREATE TABLE recuperacion.attendance (
+    id NUMBER DEFAULT seq_attendance.NEXTVAL NOT NULL,
+    idactiviti NUMBER,
+    idadolescente NUMBER,
+    asistencia CHAR(1),
+    active CHAR(1),
+    attendance_date DATE -- Cambié "date" a "attendance_date" porque DATE es una palabra reservada en Oracle
+);
+
+-- Insertar datos en la tabla
+INSERT INTO recuperacion.attendance (id, idactiviti, idadolescente, asistencia, active, attendance_date)
+VALUES (seq_attendance.NEXTVAL, 1, 1, 'A', 'A', TO_DATE('24/11/2023', 'DD/MM/YYYY'));
+
+-- Consultar los datos de la tabla
+SELECT * FROM recuperacion.attendance;
+
+
+-- addres --
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_address
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.address (
+    id NUMBER DEFAULT seq_address.NEXTVAL PRIMARY KEY NOT NULL,
+    address VARCHAR2(200),
+    idadolescent VARCHAR2(200),
+    active CHAR(1),
+    ubigeo CHAR(6)
+);
+
+-- Insertar los datos en la tabla
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (15, 'Urb. Sindicato Choferes', '6', 'I', '755995');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (18, 'Malvinas', '1', 'A', '741852');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (12, 'Av. 28 de Julio', '6', 'I', '155953');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (3, 'Av. Mariscal Benavides', '2', 'I', '986314');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (8, 'Urb. Primavera', '11', 'I', '685324');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (4, 'Urb. Jose Maria Escriba de Balaguer', '1', 'I', '985612');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (5, 'Urb. Santa Rosa', '2', 'A', '122345');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (9, 'Av. Lamar', '11', 'I', '759535');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (1, 'Asuncion 8', '1', 'I', '123456');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (14, 'Urb. el Carmelo', '1', 'I', '963852');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (6, 'Residencial Villa Cañete', '9', 'A', '122345');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (7, 'Urb. Hualcara', '10', 'A', '748652');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (2, 'Urb. el Pino', '1', 'I', '842657');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (11, 'Urb. las Viñas', '12', 'A', '122345');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (16, 'Urb. Valle Hermoso', '6', 'A', '627489');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (19, 'Urb. Tercer Mundo', '1', 'A', '122345');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (17, 'Urb. Huaca de los chinos', '1', 'I', '789456');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (10, 'Urb. Libertad', '11', 'I', '122345');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (20, 'Sector San Viator', '3', 'A', '515965');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (21, 'Sector San Jose', '4', 'A', '739146');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (22, 'Sector la Florida', '5', 'A', '197364');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (23, 'Compradore', '7', 'A', '159753');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (24, 'San Ambrosio', '8', 'A', '953751');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (25, 'Huapalla', '9', 'A', '741963');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (26, 'Calle Tupac Camaru', '10', 'A', '741963');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (27, '02 de Mayo', '11', 'A', '456128');
+INSERT INTO recuperacion.address (id, address, idadolescent, active, ubigeo) VALUES (13, 'Urb. las Casuarinas', '11', 'I', '122345');
+
+
+-- actividades --
+-- Crear la secuencia
+CREATE SEQUENCE seq_activities
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.activities (
+    id NUMBER DEFAULT seq_activities.NEXTVAL NOT NULL,
+    name VARCHAR2(255),
+    description CLOB,
+    activity_date DATE, -- Cambié "date" a "activity_date" porque DATE es una palabra reservada en Oracle
+    duration VARCHAR2(50),
+    location VARCHAR2(255),
+    active CHAR(1),
+    type_pronacej VARCHAR2(50),
+    type_soa VARCHAR2(50)
+);
+
+-- Insertar datos en la tabla
+INSERT INTO recuperacion.activities (id, name, description, activity_date, duration, location, active, type_pronacej, type_soa)
+VALUES (3, 'Actividad 3', 'Descripción del evento 1', TO_DATE('2023-10-18', 'YYYY-MM-DD'), '2 horas', 'Ubicación 1', 'A', 'Pronacej 1', 'SOA 1');
+
+INSERT INTO recuperacion.activities (id, name, description, activity_date, duration, location, active, type_pronacej, type_soa)
+VALUES (4, 'Actividad 4', 'Descripción del evento 1', TO_DATE('2023-10-18', 'YYYY-MM-DD'), '2 horas', 'Ubicación 1', 'A', 'Pronacej 1', 'SOA 1');
+
+INSERT INTO recuperacion.activities (id, name, description, activity_date, duration, location, active, type_pronacej, type_soa)
+VALUES (1, 'Actividad 1', 'Descripción del evento 1', TO_DATE('2023-10-18', 'YYYY-MM-DD'), '2 horas', 'Ubicación 1', 'A', 'Pronacej 1', 'SOA 1');
+
+INSERT INTO recuperacion.activities (id, name, description, activity_date, duration, location, active, type_pronacej, type_soa)
+VALUES (2, 'Actividad 2', 'Descripción del evento 2', TO_DATE('2023-10-19', 'YYYY-MM-DD'), '3 horas', 'Ubicación 2', 'A', 'Pronacej 2', 'SOA 2');
+
+-- Consultar los datos de la tabla
+SELECT * FROM recuperacion.activities;
+
+
+-- funcionario --
+
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_funcionary
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.funcionary (
+    id_funcionary NUMBER DEFAULT seq_funcionary.NEXTVAL NOT NULL,
+    name VARCHAR2(255),
+    surnamefather VARCHAR2(255),
+    surnamemother VARCHAR2(255),
+    dni VARCHAR2(255),
+    phonenumber VARCHAR2(255),
+    range VARCHAR2(255),
+    confirmation VARCHAR2(255),
+    department VARCHAR2(255),
+    address VARCHAR2(255),
+    email VARCHAR2(255),
+    status VARCHAR2(255)
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO recuperacion.funcionary (id_funcionary, name, surnamefather, surnamemother, dni, phonenumber, range, confirmation, department, address, email, status)
+VALUES (4, 'Azul', 'Morales', 'Paredes', '12345678', '123456789', 'psicologo', 'Confirmado', 'Departamento Ejemplo', '123 Calle Ejemplo', 'ejemplo@email.com', 'A');
+
+INSERT INTO recuperacion.funcionary (id_funcionary, name, surnamefather, surnamemother, dni, phonenumber, range, confirmation, department, address, email, status)
+VALUES (3, 'Edgar', 'Vargaz', 'Romero', '12345678', '123456789', 'psicologo', 'Confirmado', 'Departamento Ejemplo', '123 Calle Ejemplo', 'ejemplo@email.com', 'A');
+
+-- Consultar datos de la tabla
+SELECT * FROM recuperacion.funcionary;
+
+
+-- teen --
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_teen
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.teen (
+    id_adolescente NUMBER DEFAULT seq_teen.NEXTVAL PRIMARY KEY NOT NULL,
+    name VARCHAR2(200),
+    surnamefather VARCHAR2(200),
+    surnamemother VARCHAR2(200),
+    dni VARCHAR2(8),
+    estado CHAR(1) DEFAULT 'A' NOT NULL
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (1, 'Robert', 'Sanchez', 'Rodriguez', '12345678', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (2, 'Juan', 'Sanchez', 'Rodriguez', '12345678', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (3, 'Pedroi', 'Sanchez', 'Rodriguez', '12345678', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (4, 'Alberto', 'Quispe', 'Rodriguez', '12345678', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (5, 'Piero', 'Rojas', 'Quispe', '12345689', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (6, 'Jhonathan', 'Sanchez', 'Napan', '78945612', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (7, 'Victor', 'Robles', 'Rodriguez', '74185296', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (8, 'Andrea', 'Rodriguez', 'Guerra', '32165498', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (9, 'Claudia', 'Rodriguez', 'Guerra', '32165489', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (10, 'Josue', 'Casas', 'Gutierrez', '35789646', 'A');
+
+INSERT INTO recuperacion.teen (id_adolescente, name, surnamefather, surnamemother, dni, estado)
+VALUES (11, 'Naomi', 'Gutierrez', 'Gutierrez', '12345678', 'A');
+
+-- Consultar datos de la tabla
+SELECT * FROM recuperacion.teen;
+
+
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_programs
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.programs (
+    id NUMBER NOT NULL, -- No se usa DEFAULT aquí
+    name VARCHAR2(255),
+    program_type VARCHAR2(255), -- Cambié 'type' a 'program_type' para evitar conflicto
+    beneficiary VARCHAR2(255),
+    responsible VARCHAR2(255),
+    description CLOB,
+    duration NUMBER,
+    program_condition CHAR(1), -- Cambié 'condition' a 'program_condition'
+    program_level VARCHAR2(255), -- Cambié 'level' a 'program_level'
+    CONSTRAINT pk_programs PRIMARY KEY (id) -- Clave primaria para id
+);
+
+-- Insertar datos usando la secuencia
+INSERT INTO recuperacion.programs (id, name, program_type, beneficiary, responsible, description, duration, program_condition, program_level)
+VALUES (seq_programs.NEXTVAL, 'FIRMES Y ADELANTE', 'Tipo B', 'Beneficiario B', 'docente 2', 'Descripción del programa B', 1, 'A', 'Nivel B');
+
+INSERT INTO recuperacion.programs (id, name, program_type, beneficiary, responsible, description, duration, program_condition, program_level)
+VALUES (seq_programs.NEXTVAL, 'INTERVENCIÓN TERAPÉUTICA', 'Tipo A', 'Beneficiario A', 'docente 1', 'Descripción del programa A', 1, 'A', 'Nivel A');
+
+INSERT INTO recuperacion.programs (id, name, program_type, beneficiary, responsible, description, duration, program_condition, program_level)
+VALUES (seq_programs.NEXTVAL, 'TRABAJANDO POR MI COMUNIDAD', 'Tipo C', 'Beneficiario C', 'docente 3', 'Descripción del programa C', 1, 'A', 'Nivel C');
+
+-- Consultar datos
+SELECT * FROM recuperacion.programs;
+
+
+
+-- funcionarios_adolescente --
+
+
+-- Crear la base de datos (Nota: en Oracle, no se crea la base de datos explícitamente con CREATE DATABASE. Se asume que ya está creada).
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_detalle
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.funcionarios_adolescente (
+    id_funcionaryteend NUMBER NOT NULL, -- Usamos NUMBER para los enteros
+    description VARCHAR2(255),
+    estado CHAR(1),
+    id_adolescente NUMBER,
+    id_funcionary NUMBER,
+    start_date DATE,
+    register_date DATE,
+    CONSTRAINT pk_funcionarios_adolescente PRIMARY KEY (id_funcionaryteend) -- Definir la clave primaria
+);
+
+-- Insertar datos
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'sdad', 'A', 9, 3, TO_DATE('2024-02-13', 'YYYY-MM-DD'), TO_DATE('2024-02-11', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'sdad', 'A', 8, 3, TO_DATE('2024-02-13', 'YYYY-MM-DD'), TO_DATE('2024-02-11', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'sdad', 'A', 5, 3, TO_DATE('2024-02-13', 'YYYY-MM-DD'), TO_DATE('2024-02-11', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'sdad', 'A', 11, 3, TO_DATE('2024-02-13', 'YYYY-MM-DD'), TO_DATE('2024-02-11', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dasd', 'A', 2, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dasd', 'A', 6, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dasdas', 'A', 4, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dasdas', 'A', 10, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dsad', 'A', 1, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'dsad', 'A', 3, 3, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO recuperacion.funcionarios_adolescente (id_funcionaryteend, description, estado, id_adolescente, id_funcionary, start_date, register_date) 
+VALUES (seq_detalle.NEXTVAL, 'scacsa', 'A', 7, 4, TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+
+-- Consultar los datos insertados
+SELECT * FROM recuperacion.funcionarios_adolescente;
+
+
+-- asignacion -- 
+
+
+-- Crear la secuencia
+CREATE SEQUENCE seq_asignationprograms
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+-- Crear la tabla
+CREATE TABLE recuperacion.asignationprograms (
+    id NUMBER NOT NULL,
+    id_programs NUMBER,
+    id_activities NUMBER,
+    date_asignation DATE,
+    direction VARCHAR2(255),
+    name_programs VARCHAR2(255),
+    name_activities VARCHAR2(255),
+    active VARCHAR2(255),
+    CONSTRAINT pk_asignationprograms PRIMARY KEY (id) -- Definir la clave primaria
+);
+
+-- Insertar los datos
+INSERT INTO recuperacion.asignationprograms (id, id_programs, id_activities, date_asignation, direction, name_programs, name_activities, active)
+VALUES (seq_asignationprograms.NEXTVAL, 2, 2, TO_DATE('2023-12-07', 'YYYY-MM-DD'), 'Otra dirección', 'FIRMES Y ADELANTE', 'Actividad 2', 'No');
+
+INSERT INTO recuperacion.asignationprograms (id, id_programs, id_activities, date_asignation, direction, name_programs, name_activities, active)
+VALUES (seq_asignationprograms.NEXTVAL, 3, 3, TO_DATE('2023-12-07', 'YYYY-MM-DD'), 'Dirección de prueba', 'TRABAJANDO POR MI COMUNIDAD', 'Actividad 3', 'Sí');
+
+INSERT INTO recuperacion.asignationprograms (id, id_programs, id_activities, date_asignation, direction, name_programs, name_activities, active)
+VALUES (seq_asignationprograms.NEXTVAL, 1, 4, TO_DATE('2023-12-08', 'YYYY-MM-DD'), 'Ejemplo dirección', 'INTERVENCIÓN TERAPÉUTICA', 'Actividad 4', 'Sí');
+
+INSERT INTO recuperacion.asignationprograms (id, id_programs, id_activities, date_asignation, direction, name_programs, name_activities, active)
+VALUES (seq_asignationprograms.NEXTVAL, 1, 1, TO_DATE('2023-12-07', 'YYYY-MM-DD'), 'Ejemplo dirección', 'INTERVENCIÓN TERAPÉUTICA', 'Actividad 1', 'Sí');
+
+-- Consultar los datos insertados
+SELECT * FROM recuperacion.asignationprograms;
+
+
+
+

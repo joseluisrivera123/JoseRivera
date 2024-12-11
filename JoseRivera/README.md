@@ -1,2 +1,0 @@
-# JoseRivera
-TP2

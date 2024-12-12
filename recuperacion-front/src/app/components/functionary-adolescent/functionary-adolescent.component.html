@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Gestión de Funcionarios y Adolescentes</h1>
+
+  <!-- Selección del Funcionario -->
+  <form [formGroup]="functionaryAdolescentForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Seleccionar Funcionario</mat-label>
+      <mat-select formControlName="id_funcionary" required>
+        <mat-option *ngFor="let functionary of functionaries" [value]="functionary.idFuncionary">
+          {{ functionary.name }} {{ functionary.surnamefather }} {{ functionary.surnamemother }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Selección de Adolescentes -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Seleccionar Adolescentes</mat-label>
+      <mat-select formControlName="id_adolescents" multiple required>
+        <mat-option *ngFor="let teen of teens" [value]="teen.idTeen">
+          {{ teen.name }} {{ teen.surnamefather }} {{ teen.surnamemother }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Campo Descripción -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!functionaryAdolescentForm.valid">
+      Asignar Adolescentes
+    </button>
+  </form>
+
+  <h2>Lista de Adolescentes Asignados</h2>
+
+  <!-- Lista de Adolescentes Asignados -->
+  <mat-list>
+    <mat-list-item *ngFor="let assignment of assignments">
+      <mat-icon mat-list-icon>person</mat-icon>
+      <div mat-line>{{ assignment.teenName }} {{ assignment.teenSurname }}</div>
+      <div mat-line class="secondary">Funcionario: {{ assignment.functionaryName }}</div>
+      <div mat-line class="tertiary">Descripción: {{ assignment.description }}</div>
+    </mat-list-item>
+  </mat-list>
+</div>

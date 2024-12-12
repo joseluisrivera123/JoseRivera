@@ -1,0 +1,16 @@
+<mat-sidenav-container class="example-container">
+    <!-- Lateral Menu -->
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item routerLink="/teen" routerLinkActive="active">Adolescentes</mat-list-item>
+        <mat-list-item routerLink="/functionary" routerLinkActive="active">Funcionarios</mat-list-item>
+        <a mat-list-item routerLink="/functionary-adolescent">Asignacion</a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Contenido principal -->
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

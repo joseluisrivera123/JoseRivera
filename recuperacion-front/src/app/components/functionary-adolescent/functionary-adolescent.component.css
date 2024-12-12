@@ -1,0 +1,28 @@
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-list-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.secondary {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.tertiary {
+  font-size: 0.8rem;
+  color: #888;
+}

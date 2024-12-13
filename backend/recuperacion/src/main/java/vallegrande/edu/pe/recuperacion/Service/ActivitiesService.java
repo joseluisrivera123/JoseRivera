@@ -6,41 +6,27 @@ import vallegrande.edu.pe.recuperacion.Model.Activities;
 import vallegrande.edu.pe.recuperacion.Repository.ActivitiesRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActivitiesService {
+
     @Autowired
-    private ActivitiesRepository activitiesRepository;
+    private ActivitiesRepository repository;
 
-    public List<Activities> listarTodos() {
-        return activitiesRepository.findAll();
+    public List<Activities> findAll() {
+        return repository.findAll();
     }
 
-    public Activities buscarPorId(Long id) {
-        return activitiesRepository.findById(id).orElse(null);
+    public Optional<Activities> findById(Long id) {
+        return repository.findById(id);
     }
 
-    public Activities guardar(Activities activity) {
-        return activitiesRepository.save(activity);
+    public Activities save(Activities activity) {
+        return repository.save(activity);
     }
 
-    public Activities actualizar(Long id, Activities activityActualizada) {
-        Activities activity = activitiesRepository.findById(id).orElse(null);
-        if (activity != null) {
-            activity.setName(activityActualizada.getName());
-            activity.setDescription(activityActualizada.getDescription());
-            activity.setActivityDate(activityActualizada.getActivityDate());
-            activity.setDuration(activityActualizada.getDuration());
-            activity.setLocation(activityActualizada.getLocation());
-            activity.setActive(activityActualizada.getActive());
-            activity.setTypePronacej(activityActualizada.getTypePronacej());
-            activity.setTypeSoa(activityActualizada.getTypeSoa());
-            return activitiesRepository.save(activity);
-        }
-        return null;
-    }
-
-    public void eliminar(Long id) {
-        activitiesRepository.deleteById(id);
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }

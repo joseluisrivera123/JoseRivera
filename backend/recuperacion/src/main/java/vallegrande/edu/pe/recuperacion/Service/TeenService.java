@@ -1,6 +1,5 @@
 package vallegrande.edu.pe.recuperacion.Service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vallegrande.edu.pe.recuperacion.Model.Teen;
@@ -23,28 +22,27 @@ public class TeenService {
     }
 
     public Teen guardar(Teen teen) {
-        teen.setEstado('A'); // Estado predeterminado como activo
+        // Verifica que el estado por defecto sea 'A'
+        teen.setEstado('A');
         return teenRepository.save(teen);
     }
 
-    public Teen actualizar(Long id, Teen teenActualizado) {
-        Teen teen = teenRepository.findById(id).orElse(null);
-        if (teen != null) {
-            teen.setName(teenActualizado.getName());
-            teen.setSurnamefather(teenActualizado.getSurnamefather());
-            teen.setSurnamemother(teenActualizado.getSurnamemother());
-            teen.setDni(teenActualizado.getDni());
-            teen.setEstado(teenActualizado.getEstado());
-            return teenRepository.save(teen);
-        }
-        return null;
+    public Teen actualizar(Long id, Teen teen) {
+        return teenRepository.findById(id).map(existingTeen -> {
+            existingTeen.setName(teen.getName());
+            existingTeen.setSurnamefather(teen.getSurnamefather());
+            existingTeen.setSurnamemother(teen.getSurnamemother());
+            existingTeen.setDni(teen.getDni());
+            existingTeen.setEstado(teen.getEstado());
+            return teenRepository.save(existingTeen);
+        }).orElse(null);
     }
 
     public void eliminar(Long id) {
         Teen teen = teenRepository.findById(id).orElse(null);
         if (teen != null) {
             teen.setEstado('I'); // Cambiar el estado a inactivo
-            teenRepository.save(teen); // Guardar los cambios
+            teenRepository.save(teen);
         }
     }
 }

@@ -45,6 +45,11 @@ public class FunctionaryService {
     }
 
     public void eliminar(Long id) {
-        functionaryRepository.deleteById(id);
+        Functionary functionary = functionaryRepository.findById(id).orElse(null);
+        if (functionary != null) {
+            functionary.setStatus('I');  // Cambiar el estado a Inactivo (I)
+            functionaryRepository.save(functionary);
+        }
     }
 }
+

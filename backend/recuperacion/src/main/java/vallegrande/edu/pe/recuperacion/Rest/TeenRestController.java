@@ -27,9 +27,14 @@ public class TeenRestController {
     }
 
     @PostMapping
-    public Teen crearTeen(@RequestBody Teen teen) {
-        teen.setEstado('A');
-        return teenService.guardar(teen);
+    public ResponseEntity<Teen> crearTeen(@RequestBody Teen teen) {
+        try {
+            teen.setEstado('A');  // Asegurando que el estado sea 'A'
+            Teen nuevoTeen = teenService.guardar(teen);
+            return ResponseEntity.ok(nuevoTeen);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @PutMapping("/{id}")
@@ -37,6 +42,8 @@ public class TeenRestController {
         Teen teenActualizado = teenService.actualizar(id, teen);
         return teenActualizado != null ? ResponseEntity.ok(teenActualizado) : ResponseEntity.notFound().build();
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarTeen(@PathVariable Long id) {

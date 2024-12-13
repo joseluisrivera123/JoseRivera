@@ -1,0 +1,88 @@
+<div class="container">
+  <h2 class="title">Relación de Funcionarios con Adolescentes</h2>
+
+  <form class="form" (ngSubmit)="submit()">
+    <mat-card>
+      <mat-card-content>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Seleccionar Funcionario</mat-label>
+            <mat-select [(value)]="selectedFunctionary">
+              <mat-option *ngFor="let func of functionaries" [value]="func.id">{{ func.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Seleccionar Adolescentes</mat-label>
+            <mat-select [(value)]="selectedTeens" multiple>
+              <mat-option *ngFor="let teen of teens" [value]="teen.id">{{ teen.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Descripción</mat-label>
+            <input matInput [(ngModel)]="description" name="description" required placeholder="Ingrese una descripción" />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="action-buttons">
+        <button mat-raised-button color="primary" type="submit">Asociar</button>
+        <button mat-button color="warn" type="reset" (click)="clearForm()">Limpiar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+  <h3 class="subtitle">Relaciones Registradas</h3>
+
+  <mat-card>
+    <mat-card-content>
+      <table mat-table [dataSource]="associations" class="mat-elevation-z8 full-width">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let assoc">{{ assoc.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="functionaryName">
+          <th mat-header-cell *matHeaderCellDef>Funcionario</th>
+          <td mat-cell *matCellDef="let assoc">{{ assoc.functionary.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="teensNames">
+          <th mat-header-cell *matHeaderCellDef>Adolescentes</th>
+          <td mat-cell *matCellDef="let assoc">{{ assoc.teensNames }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let assoc">{{ assoc.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let assoc">{{ assoc.estado }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let assoc">
+            <button mat-icon-button color="warn" (click)="deleteAssociation(assoc.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+  

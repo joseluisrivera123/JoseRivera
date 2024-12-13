@@ -1,0 +1,87 @@
+/* Estilo básico para el contenedor del formulario */
+.form-container {
+    margin: 20px auto;
+    padding: 25px;
+    max-width: 620px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #494949;
+  }
+  
+  /* Estilo para los campos del formulario */
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  /* Estilo para los botones */
+  button {
+    margin-top: 16px;
+  }
+  
+  /* Estilos para la tabla */
+  .table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .table tr:hover {
+    background-color: #000000;
+  }
+  
+  /* Estilo para la tabla con iconos de acciones */
+  .acciones {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .mat-icon {
+    cursor: pointer;
+  }
+  
+  mat-header-cell {
+    background-color: #1976d2;
+    color: white;
+  }
+
+  mat-table {
+    border-collapse: collapse;
+  }
+  
+  mat-header-row, mat-row {
+    text-align: left;
+  }
+  
+
+  
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+
+
+
+

@@ -1,0 +1,107 @@
+<mat-card class="form-container">
+  <h2>{{ isEditMode ? 'Actualizar Actividad' : 'Crear Actividad' }}</h2>
+  <form #activityForm="ngForm" (ngSubmit)="saveActivity()">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" [(ngModel)]="activity.name" name="name" required />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="activity.description" name="description" required></textarea>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha</mat-label>
+        <input matInput type="date" [(ngModel)]="activity.activityDate" name="activityDate" required />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Duración</mat-label>
+        <input matInput type="text" [(ngModel)]="activity.duration" name="duration" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Ubicación</mat-label>
+        <input matInput type="text" [(ngModel)]="activity.location" name="location" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo Pronacej</mat-label>
+        <input matInput type="text" [(ngModel)]="activity.typePronacej" name="typePronacej" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo SOA</mat-label>
+        <input matInput type="text" [(ngModel)]="activity.typeSoa" name="typeSoa" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="activityForm.invalid">
+      {{ isEditMode ? 'Actualizar' : 'Crear' }}
+    </button>
+    <button mat-button type="button" (click)="resetForm()" *ngIf="isEditMode">Cancelar</button>
+  </form>
+</mat-card>
+
+<hr />
+
+<h2>Listado de Actividades</h2>
+<mat-table [dataSource]="activities" class="table">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.description }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="activityDate">
+    <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.activityDate }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef>Duración</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.duration }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef>Ubicación</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.location }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="typePronacej">
+    <mat-header-cell *matHeaderCellDef>Tipo Pronacej</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.typePronacej }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="typeSoa">
+    <mat-header-cell *matHeaderCellDef>Tipo SOA</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.typeSoa }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="active">
+    <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.active === 'A' ? 'Activo' : 'Inactivo' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let activity">
+      <button mat-raised-button color="accent" (click)="editActivity(activity)">Editar</button>
+      <button mat-raised-button color="warn" (click)="deleteActivity(activity.id)">Eliminar</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

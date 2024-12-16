@@ -1,47 +1,67 @@
 <mat-card class="form-container">
   <h2>{{ isEditMode ? 'Actualizar Adolescente' : 'Crear Adolescente' }}</h2>
   <form #teenForm="ngForm" (ngSubmit)="saveTeen()">
-    <!-- Nombre -->
     <div class="form-group">
       <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input matInput type="text" [(ngModel)]="teen.name" name="name" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$" #name="ngModel">
-        <mat-error *ngIf="name.invalid && name.touched">
-          El nombre solo debe contener letras.
-        </mat-error>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="teen.name"
+          name="name"
+          required
+          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"
+          #name="ngModel"
+        />
+        <mat-error *ngIf="name.invalid && name.touched">El nombre solo debe contener letras.</mat-error>
       </mat-form-field>
     </div>
 
-    <!-- Apellido Paterno -->
     <div class="form-group">
       <mat-form-field appearance="fill">
         <mat-label>Apellido Paterno</mat-label>
-        <input matInput type="text" [(ngModel)]="teen.surnamefather" name="surnamefather" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$" #surnamefather="ngModel">
-        <mat-error *ngIf="surnamefather.invalid && surnamefather.touched">
-          El apellido paterno solo debe contener letras.
-        </mat-error>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="teen.surnamefather"
+          name="surnamefather"
+          required
+          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"
+          #surnamefather="ngModel"
+        />
+        <mat-error *ngIf="surnamefather.invalid && surnamefather.touched">El apellido paterno solo debe contener letras.</mat-error>
       </mat-form-field>
     </div>
 
-    <!-- Apellido Materno -->
     <div class="form-group">
       <mat-form-field appearance="fill">
         <mat-label>Apellido Materno</mat-label>
-        <input matInput type="text" [(ngModel)]="teen.surnamemother" name="surnamemother" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$" #surnamemother="ngModel">
-        <mat-error *ngIf="surnamemother.invalid && surnamemother.touched">
-          El apellido materno solo debe contener letras.
-        </mat-error>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="teen.surnamemother"
+          name="surnamemother"
+          required
+          pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"
+          #surnamemother="ngModel"
+        />
+        <mat-error *ngIf="surnamemother.invalid && surnamemother.touched">El apellido materno solo debe contener letras.</mat-error>
       </mat-form-field>
     </div>
 
-    <!-- DNI -->
     <div class="form-group">
       <mat-form-field appearance="fill">
         <mat-label>DNI</mat-label>
-        <input matInput type="text" [(ngModel)]="teen.dni" name="dni" required pattern="^[0-9]+$" #dni="ngModel">
-        <mat-error *ngIf="dni.invalid && dni.touched">
-          El DNI solo debe contener números.
-        </mat-error>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="teen.dni"
+          name="dni"
+          required
+          pattern="^[0-9]+$"
+          #dni="ngModel"
+        />
+        <mat-error *ngIf="dni.invalid && dni.touched">El DNI solo debe contener números.</mat-error>
       </mat-form-field>
     </div>
 
@@ -52,11 +72,16 @@
   </form>
 </mat-card>
 
+
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="exportToExcel()">Exportar a Excel</button>
+  <button mat-raised-button color="accent" (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
 <hr />
 
 <h2>Listado de Adolescentes</h2>
 <mat-table [dataSource]="teens" class="table">
-
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
     <mat-cell *matCellDef="let teen"> {{ teen.name }} </mat-cell>
@@ -77,21 +102,11 @@
     <mat-cell *matCellDef="let teen"> {{ teen.dni }} </mat-cell>
   </ng-container>
 
-  <!-- Nueva columna para el estado -->
-  <ng-container matColumnDef="estado">
-    <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-    <mat-cell *matCellDef="let teen"> {{ teen.estado === 'A' ? 'Activo' : 'Inactivo' }} </mat-cell>
-  </ng-container>
-
-  <!-- Nueva columna para acciones -->
   <ng-container matColumnDef="acciones">
-    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
     <mat-cell *matCellDef="let teen">
       <button mat-raised-button color="accent" (click)="editTeen(teen)">Editar</button>
       <button mat-raised-button color="warn" (click)="deleteTeen(teen.idAdolescente)">Eliminar</button>
-      <button mat-raised-button color="primary" (click)="toggleEstado(teen)">
-        {{ teen.estado === 'A' ? 'Desactivar' : 'Activar' }}
-      </button>
     </mat-cell>
   </ng-container>
 

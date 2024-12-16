@@ -1,6 +1,7 @@
 <mat-card class="form-container">
   <h2>{{ isEditMode ? 'Actualizar Actividad' : 'Crear Actividad' }}</h2>
   <form #activityForm="ngForm" (ngSubmit)="saveActivity()">
+    <!-- Campos del formulario -->
     <div class="form-group">
       <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
@@ -50,6 +51,11 @@
   </form>
 </mat-card>
 
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="exportToExcel()">Exportar a Excel</button>
+  <button mat-raised-button color="accent" (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
 <hr />
 
 <h2>Listado de Actividades</h2>
@@ -59,49 +65,9 @@
     <mat-cell *matCellDef="let activity">{{ activity.name }}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.description }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="activityDate">
-    <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.activityDate }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="duration">
-    <mat-header-cell *matHeaderCellDef>Duración</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.duration }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="location">
-    <mat-header-cell *matHeaderCellDef>Ubicación</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.location }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="typePronacej">
-    <mat-header-cell *matHeaderCellDef>Tipo Pronacej</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.typePronacej }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="typeSoa">
-    <mat-header-cell *matHeaderCellDef>Tipo SOA</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.typeSoa }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="active">
-    <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
-    <mat-cell *matCellDef="let activity">{{ activity.active === 'A' ? 'Activo' : 'Inactivo' }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="acciones">
-    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-    <mat-cell *matCellDef="let activity">
-      <button mat-raised-button color="accent" (click)="editActivity(activity)">Editar</button>
-      <button mat-raised-button color="warn" (click)="deleteActivity(activity.id)">Eliminar</button>
-    </mat-cell>
-  </ng-container>
-
+  <!-- Otras columnas (description, activityDate, etc.) -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+
+

@@ -7,6 +7,7 @@ import vallegrande.edu.pe.recuperacion.Model.Asignacion;
 import vallegrande.edu.pe.recuperacion.Service.AsignacionService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/asignaciones")
@@ -28,8 +29,9 @@ public class AsignacionRestController {
 
     // Obtener todas las asignaciones
     @GetMapping
-    public List<Asignacion> listarAsignaciones() {
-        return asignacionService.getAllAsignaciones();
+    public ResponseEntity<List<Map<String, Object>>> getAllAsignacionesConNombres() {
+        return ResponseEntity.ok(asignacionService.listarAsignacionesConNombres());
     }
+
 
 }

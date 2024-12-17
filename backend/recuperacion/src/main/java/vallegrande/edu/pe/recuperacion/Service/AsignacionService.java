@@ -10,7 +10,10 @@ import vallegrande.edu.pe.recuperacion.Repository.AsignacionRepository;
 import vallegrande.edu.pe.recuperacion.Repository.FunctionaryRepository;
 import vallegrande.edu.pe.recuperacion.Repository.TeenRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AsignacionService {
@@ -40,8 +43,21 @@ public class AsignacionService {
     }
 
     // Nuevo método para listar todas las asignaciones
-    public List<Asignacion> getAllAsignaciones() {
-        return asignacionRepository.findAll();
+    public List<Map<String, Object>> listarAsignacionesConNombres() {
+        return asignacionRepository.findAll().stream()
+                .map(a -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", a.getId());
+                    map.put("description", a.getDescription());
+                    map.put("funcionarioName", functionaryRepository.findById(a.getIdFuncionary())
+                            .map(f -> f.getName() + " " + f.getSurnamefather())
+                            .orElse("Desconocido"));
+                    map.put("adolescenteName", teenRepository.findById(a.getIdAdolescente())
+                            .map(t -> t.getName() + " " + t.getSurnamefather())
+                            .orElse("Desconocido"));
+                    return map;
+                }).collect(Collectors.toList());
     }
+
 }
 

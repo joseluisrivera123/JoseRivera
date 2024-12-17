@@ -14,7 +14,7 @@ public class Asignacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_funcionaryteend")
     private Long id;
-
+    
     @Column(name = "description")
     private String description;
 

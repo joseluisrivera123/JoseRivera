@@ -1,0 +1,18 @@
+<mat-sidenav-container class="example-container">
+    <!-- Lateral Menu -->
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item routerLink="/teen" routerLinkActive="active">Adolescentes</mat-list-item>
+        <mat-list-item routerLink="/functionary" routerLinkActive="active">Funcionarios</mat-list-item>
+        <!--<mat-list-item routerLink="/Activities" routerLinkActive="active">Activities</mat-list-item> -->
+        <mat-list-item routerLink="/Asignacion" routerLinkActive="active">Asignaciones</mat-list-item>
+        <!--<mat-list-item routerLink="/functionary-teen" routerLinkActive="active">Asignaciones</mat-list-item>-->
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Contenido principal -->
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

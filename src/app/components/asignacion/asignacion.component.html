@@ -1,0 +1,76 @@
+<mat-card class="form-container">
+  <h2>{{ asignacion.id ? 'Actualizar Asignación' : 'Crear Asignación' }}</h2>
+  <form (ngSubmit)="saveAsignacion()">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar Funcionario</mat-label>
+        <mat-select [(ngModel)]="asignacion.idFuncionary" name="idFuncionary" required>
+          <mat-option *ngFor="let func of funcionarios" [value]="func.idFuncionary">
+            {{ func.name }} {{ func.surnamefather }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar Adolescente</mat-label>
+        <mat-select [(ngModel)]="asignacion.idAdolescente" name="idAdolescente" required>
+          <mat-option *ngFor="let teen of teens" [value]="teen.idAdolescente">
+            {{ teen.name }} {{ teen.surnamefather }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="asignacion.description" name="description" required></textarea>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">{{ asignacion.id ? 'Actualizar' : 'Asociar' }}</button>
+    <button mat-button type="button" (click)="resetForm()">Limpiar</button>
+  </form>
+</mat-card>
+
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="exportToExcel()">Exportar a Excel</button>
+  <button mat-raised-button color="accent" (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
+<h2>Relaciones Registradas</h2>
+<mat-table [dataSource]="asignaciones" class="table">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let a"> {{ a.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="funcionario">
+    <mat-header-cell *matHeaderCellDef> Funcionario </mat-header-cell>
+    <mat-cell *matCellDef="let a"> {{ a.funcionarioName }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="adolescente">
+    <mat-header-cell *matHeaderCellDef> Adolescente </mat-header-cell>
+    <mat-cell *matCellDef="let a"> {{ a.adolescenteName }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+    <mat-cell *matCellDef="let a"> {{ a.description }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let a">
+      <button mat-icon-button color="warn" (click)="deleteAsignacion(a.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

@@ -1,0 +1,153 @@
+<mat-card class="form-container">
+  <h2>{{ functionary.idFuncionary ? 'Actualizar Funcionario' : 'Crear Funcionario' }}</h2>
+  <form (ngSubmit)="saveFunctionary()">
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.name" name="name" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido Paterno</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.surnamefather" name="surnamefather" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido Materno</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.surnamemother" name="surnamemother" required pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>DNI</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.dni" name="dni" required pattern="^[0-9]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.phonenumber" name="phonenumber" required pattern="^[0-9]+$">
+      </mat-form-field>
+    </div>
+    
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Rango</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.range" name="range">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>confirmacion</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.confirmation" name="confirmation" required pattern="^[0-9]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Departament</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.department" name="department">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Direccion</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.address" name="address" required pattern="^[0-9]+$">
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput type="text" [(ngModel)]="functionary.email" name="email" required pattern="^[0-9]+$">
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">{{ functionary.idFuncionary ? 'Actualizar' : 'Crear' }}</button>
+  </form>
+</mat-card>
+
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="exportToExcel()">Exportar a Excel</button>
+  <button mat-raised-button color="accent" (click)="exportToPDF()">Exportar a PDF</button>
+</div>
+
+
+<hr>
+
+<h2>Listado de Funcionarios</h2>
+<mat-table [dataSource]="functionaries" class="table">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="surnamefather">
+    <mat-header-cell *matHeaderCellDef> Apellido Paterno </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.surnamefather }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="surnamemother">
+    <mat-header-cell *matHeaderCellDef> Apellido Materno </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.surnamemother }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dni">
+    <mat-header-cell *matHeaderCellDef> DNI </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.dni }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phonenumber">
+    <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.phonenumber }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="range">
+    <mat-header-cell *matHeaderCellDef> Rango </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.range }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="confirmation">
+    <mat-header-cell *matHeaderCellDef> confirmacion </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.confirmation }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="department">
+    <mat-header-cell *matHeaderCellDef> Departamento </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.department }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.address }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+    <mat-cell *matCellDef="let f"> {{ f.email }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let f">
+      <button mat-icon-button color="primary" (click)="editFunctionary(f)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteFunctionary(f.idFuncionary)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
